@@ -21,15 +21,11 @@ class Gossip
 	def edit(id)
 		csv_file = CSV.read("db/gossip.csv")
 
-		csv_file.each_with_index do |csv, i|
-			binding.pry
-			csv << [@author, @content] if i == id.to_i
-		end
+		csv_file.each_with_index { |line, i| csv_file[i] = [@author, @content] if i == id.to_i }
 
-		# CSV.open("db/gossip.csv", "wb").each_with_index do |csv, i|
-		# 	binding.pry
-			
-		# end
+		CSV.open("db/gossip.csv", "wb") do |csv_line|
+			csv_file.each { |new_line| csv_line << new_line }
+		end
 		puts "edition faite"
 	end
 
@@ -37,7 +33,7 @@ class Gossip
 		all_gossips = []
 
 		csv = CSV.read("db/gossip.csv")
-		csv.each do |line|
+		csv.each_with_index do |line, i|
 			all_gossips << Gossip.new(line[0], line[1])
 		end
 
