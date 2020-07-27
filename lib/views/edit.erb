@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Editer un potin</title>
+  </head>
+  <body>
+    <h1>PAGE POTIN</h1>
+      <p>Voici la page du potin n°<%= params[:id] %></p>
+      <p>Son auteur : ==<%= gossip[0].author %>==</p>
+      <p>Le contenu du potin : ==<%= gossip[0].content %>==</p>
+
+    </br>
+    <h1>Edite un potin !</h1>
+    <p>Modifie ton potin via le formulaire ci-dessous</p>
+    <form action='/gossips/:id/edit/' method='POST'>
+      Saisi ici ton nom :  <input type='text' name='gossip_author'/><br/>
+      Balance ton potin : <input type='text' name='gossip_content'/><br/>
+      <input type='submit'/>
+    </form>
+  </body>
+</html>
